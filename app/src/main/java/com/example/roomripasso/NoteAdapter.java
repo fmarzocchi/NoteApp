@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,9 +43,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         holder.title.setText(allNotes.get(position).getTitle());
         holder.description.setText(allNotes.get(position).getContent());
-        int month = GregorianCalendar.getInstance().getTime().getMonth();
-        int day = GregorianCalendar.getInstance().getTime().getDay();
-        holder.date.setText(""+month+"/"+day);
+        Calendar rightNow = Calendar.getInstance();
+        String month = String.valueOf(rightNow.get(Calendar.MONTH));
+        String day = String.valueOf(rightNow.get(Calendar.DAY_OF_MONTH));
+        holder.date.setText(""+day+"/"+month);
         // Quando viene cliccata la cardview apro l'Activity NoteContent e gli passo l'id della Nota associata
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
